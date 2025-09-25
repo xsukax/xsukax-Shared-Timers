@@ -27,7 +27,7 @@ The application features a distinctive terminal-style interface with green text 
 - **IP-Based Isolation**: Users only see timers they created, ensuring privacy without requiring user accounts
 - **No Personal Data Collection**: No usernames, emails, or personal information required or stored
 - **Client-Side Timezone Handling**: Timezone information never leaves the user's browser, preventing location tracking
-- **Minimal Data Storage**: Only essential timer data (duration, start time, title) is persisted
+- **Minimal Data Storage**: Only essential timer data (duration, start time, title, ip) is persisted
 
 ### Security Measures
 - **SQL Injection Prevention**: All database queries use PDO prepared statements
