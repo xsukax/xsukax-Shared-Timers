@@ -1,368 +1,263 @@
 # xsukax Shared Timers
 
-A lightweight, privacy-focused shared timer application with local timezone support and persistent URLs. Create countdowns that can be shared with anyone while maintaining user privacy through IP-based isolation.
+A lightweight, privacy-focused web application for creating and sharing persistent countdown timers with unique URLs. Built as a single HTML file with zero dependencies and complete client-side functionality.
 
 ![Terminal Theme](https://img.shields.io/badge/Theme-Terminal-green?style=flat-square)
-![PHP](https://img.shields.io/badge/PHP-7.4+-blue?style=flat-square)
-![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey?style=flat-square)
 ![License](https://img.shields.io/badge/License-GPL%20v3.0-blue?style=flat-square)
+
+**Demo:** [https://xsukax.github.io/xsukax-Shared-Timers](https://xsukax.github.io/xsukax-Shared-Timers)
 
 ## Project Overview
 
-xsukax Shared Timers is a single-file PHP application designed for creating persistent, shareable countdown timers. Built with privacy and simplicity in mind, the application generates unique URLs for each timer, allowing users to share countdowns without requiring user accounts or authentication.
+xsukax Shared Timers is a minimalist timer application designed for users who need to create, share, and track countdown timers across teams, events, or personal projects. The application operates entirely in the browser with no server-side processing, offering instant timer creation with shareable URLs that persist across sessions.
 
-The application features a distinctive terminal-style interface with green text on a black background, providing a clean, distraction-free countdown experience. All timestamps are handled client-side, ensuring that timers display correctly in each user's local timezone regardless of server location.
-
-**Key Capabilities:**
-- Create persistent timers with custom titles and durations (up to 365 days)
-- Generate unique shareable URLs for each timer
-- Real-time countdown display with automatic refresh
-- Fullscreen mode for focused timing sessions
-- Recent timer history for quick access
-- Responsive design optimized for both desktop and mobile devices
+Key characteristics:
+- **Single-file architecture**: The entire application is contained in one HTML file (~15KB)
+- **No backend required**: All functionality executes client-side using vanilla JavaScript
+- **Zero dependencies**: No external libraries, frameworks, or API calls
+- **Instant deployment**: Works on any web server or can be opened directly in a browser
+- **Cross-platform compatibility**: Functions identically across all modern browsers and devices
 
 ## Security and Privacy Benefits
 
-### Privacy-First Architecture
-- **IP-Based Isolation**: Users only see timers they created, ensuring privacy without requiring user accounts
-- **No Personal Data Collection**: No usernames, emails, or personal information required or stored
-- **Client-Side Timezone Handling**: Timezone information never leaves the user's browser, preventing location tracking
-- **Minimal Data Storage**: Only essential timer data (duration, start time, title, ip) is persisted
+This application prioritizes user privacy and security through its architectural design:
 
-### Security Measures
-- **SQL Injection Prevention**: All database queries use PDO prepared statements
-- **XSS Protection**: All user inputs are sanitized using `htmlspecialchars()` before display
-- **Input Validation**: Comprehensive server-side and client-side form validation
-- **Error Handling**: Secure error messages that don't expose system information
-- **File Permission Management**: Database files are created with appropriate permissions
-- **Resource Limits**: Maximum timer duration limits prevent abuse
+### Complete Client-Side Operation
+All timer calculations, data encoding, and storage operations occur entirely within the user's browser. No data is transmitted to external servers, eliminating risks associated with data breaches, unauthorized access, or third-party tracking.
 
-### Data Integrity
-- **Database Constraints**: Foreign key relationships and data type enforcement
-- **Index Optimization**: Performance indexes for efficient querying
-- **Atomic Operations**: Database transactions ensure data consistency
-- **Backup-Friendly**: SQLite database can be easily backed up and restored
+### No Server-Side Data Collection
+The application requires no backend infrastructure, meaning:
+- **Zero server logs**: No IP addresses, user agents, or access patterns are recorded
+- **No analytics tracking**: The application includes no telemetry, cookies, or tracking scripts
+- **No user accounts**: No registration, authentication, or personally identifiable information is collected
+
+### URL-Based Timer Encoding
+Timer data is encoded directly into shareable URLs using Base64 encoding. This approach ensures:
+- **Ephemeral sharing**: Timer information exists only in the URL itself
+- **User control**: Users decide when and with whom to share timer links
+- **No centralized database**: Timer data is never stored on any server
+
+### Local Storage Privacy
+Recent timers are stored exclusively in the browser's localStorage:
+- **Device-specific**: Timer history remains on the user's device and is never synchronized or uploaded
+- **User-controlled**: Users can clear localStorage at any time to remove all timer history
+- **No cross-device tracking**: Timer history does not follow users across different browsers or devices
+
+### Transparent Source Code
+As a single HTML file with embedded JavaScript and CSS, the entire codebase is:
+- **Fully auditable**: Users and security researchers can inspect every line of code
+- **Open source**: Licensed under GNU GPL v3.0 for complete transparency
+- **No obfuscation**: Plain, readable code with no minification or hidden functionality
 
 ## Features and Advantages
 
-### Core Features
-- ✅ **Single-File Deployment**: Entire application contained in one PHP file
-- ✅ **Zero Configuration**: Works out-of-the-box with minimal setup
-- ✅ **Persistent Timers**: Timers continue running even if browsers are closed
-- ✅ **Shareable URLs**: Each timer gets a unique URL for easy sharing
-- ✅ **Local Timezone Support**: Automatically displays times in user's timezone
-- ✅ **Real-Time Updates**: Countdown refreshes every second without page reloads
-- ✅ **Mobile Responsive**: Optimized interface for all screen sizes
+### Core Functionality
+- **Flexible duration settings**: Configure timers from 1 second to 365 days with granular control (days, hours, minutes, seconds)
+- **Shareable URLs**: Each timer generates a unique, portable URL containing all timer data
+- **Real-time countdown**: Live updates every second with accurate time remaining display
+- **Automatic expiration detection**: Visual and modal notifications when timers reach zero
+- **Recent timers management**: Browse, reopen, and delete previously created timers
 
-### Advanced Capabilities
-- 🎯 **Fullscreen Mode**: Distraction-free countdown display
-- 📋 **One-Click URL Copying**: Easy sharing with clipboard integration
-- 📱 **Progressive Web App Ready**: Can be installed on mobile devices
-- ⌨️ **Keyboard Shortcuts**: Quick actions via keyboard controls
-- 🎨 **Terminal Aesthetic**: Distinctive hacker-style visual design
-- 📊 **Timer History**: View and access previously created timers
+### User Experience
+- **Terminal-inspired interface**: Clean, distraction-free design with hacker-aesthetic green-on-black theme
+- **Responsive layout**: Optimized for desktop, tablet, and mobile devices
+- **Fullscreen mode**: Dedicated fullscreen view for prominent timer display
+- **Timezone awareness**: All timestamps automatically display in the user's local timezone
+- **Keyboard shortcuts**: Quick actions via Ctrl+C (copy URL), F11 (fullscreen), and Esc (close modal)
 
-### Competitive Advantages
-- **Privacy-Focused**: No tracking, accounts, or personal data collection
-- **Lightweight**: Minimal resource requirements and fast loading
-- **Self-Hosted**: Complete control over data and functionality
-- **Open Source**: Fully auditable and customizable code
-- **Cross-Platform**: Works on any system with PHP support
-- **Offline-Ready**: Functions without internet after initial load
+### Technical Advantages
+- **No installation required**: Runs directly in any modern web browser
+- **Offline capable**: Once loaded, timers continue to function without internet connectivity
+- **Stateless operation**: No sessions, cookies, or persistent server connections
+- **Minimal resource usage**: Lightweight footprint with negligible CPU and memory consumption
+- **Self-contained deployment**: Single file can be hosted anywhere or run locally
 
 ## Installation Instructions
 
-### Prerequisites
-- PHP 7.4 or higher
-- PHP Extensions: `pdo`, `pdo_sqlite`
-- Web server (Apache, Nginx, or PHP built-in server)
-- Write permissions for the application directory
+### Option 1: GitHub Pages Deployment (Recommended)
+1. Fork this repository to your GitHub account
+2. Navigate to repository **Settings** → **Pages**
+3. Under **Source**, select the branch (typically `main` or `master`)
+4. Click **Save**
+5. GitHub will provide your deployment URL (e.g., `https://yourusername.github.io/xsukax-Shared-Timers`)
 
-### Quick Installation
+### Option 2: Local File System
+1. Clone or download this repository:
+   ```bash
+   git clone https://github.com/xsukax/xsukax-Shared-Timers.git
+   ```
+2. Navigate to the project directory
+3. Open `index.html` directly in your web browser (double-click or right-click → Open With)
 
-#### Option 1: Single File Setup
+### Option 3: Web Server Deployment
+Deploy to any static hosting service:
+
+**Apache/Nginx:**
 ```bash
-# Download the application
-wget https://raw.githubusercontent.com/xsukax/xsukax-Shared-Timers/refs/heads/main/index.php
-
-# Or clone the repository
-git clone https://github.com/xsukax/xsukax-Shared-Timers.git
-cd xsukax-Shared-Timers
-
-# Set proper permissions
-chmod 644 index.php
-chmod 755 .
+# Copy index.html to web server document root
+cp index.html /var/www/html/timers/
 ```
 
-#### Option 2: Database Pre-initialization
+**Python HTTP Server (Development):**
 ```bash
-# Clone the repository
-git clone https://github.com/xsukax/xsukax-Shared-Timers.git
-cd xsukax-timers
-
-# Make the initialization script executable
-chmod +x init_db.sh
-
-# Initialize the database
-./init_db.sh
-
-# Set web server permissions
-sudo chown -R www-data:www-data .
-sudo chmod 664 timers.db
+# Serve current directory on port 8000
+python3 -m http.server 8000
+# Access at http://localhost:8000
 ```
 
-### Web Server Configuration
-
-#### Apache Configuration
-```apache
-<VirtualHost *:80>
-    ServerName timers.yourdomain.com
-    DocumentRoot /path/to/xsukax-timers
-    
-    <Directory /path/to/xsukax-timers>
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-```
-
-#### Nginx Configuration
-```nginx
-server {
-    listen 80;
-    server_name timers.yourdomain.com;
-    root /path/to/xsukax-timers;
-    index index.php;
-    
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-    
-    location ~ \.php$ {
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
-```
-
-#### Development Server
+**Node.js HTTP Server:**
 ```bash
-# For development and testing
-cd /path/to/xsukax-timers
-php -S localhost:8080
+npx http-server -p 8000
 ```
 
-### Post-Installation Verification
-1. Access the application via web browser
-2. Create a test timer (e.g., 5 minutes)
-3. Verify the countdown displays correctly
-4. Test URL sharing functionality
-5. Check that the database file `timers.db` is created
+### Option 4: Cloud Hosting
+Upload `index.html` to platforms such as:
+- **Netlify**: Drag and drop the file into the Netlify dashboard
+- **Vercel**: Deploy via CLI or GitHub integration
+- **AWS S3**: Upload to S3 bucket with static website hosting enabled
+- **Cloudflare Pages**: Connect repository or upload directly
+
+### PHP Configuration
+This application does **not** require PHP, as it operates entirely with client-side JavaScript. No `php.ini` configuration is necessary. The application consists solely of HTML, CSS, and JavaScript, requiring only a web server capable of serving static files.
 
 ## Usage Guide
 
-### Creating Your First Timer
+### Creating a Timer
 
 ```mermaid
-flowchart TD
-    A[Access Application] --> B[Enter Timer Details]
-    B --> C{Valid Duration?}
-    C -->|No| D[Show Error Message]
-    C -->|Yes| E[Create Timer Record]
-    E --> F[Generate Unique URL]
-    F --> G[Redirect to Timer Page]
-    G --> H[Start Countdown Display]
-    
+graph LR
+    A[Open Application] --> B[Enter Timer Title]
+    B --> C[Set Duration<br/>Days/Hours/Minutes/Seconds]
+    C --> D[Click Start Timer]
+    D --> E[Timer URL Generated]
+    E --> F[Share URL or Copy to Clipboard]
+```
+
+**Step-by-step process:**
+
+1. **Access the application** via your deployment URL or local file
+2. **Configure timer parameters:**
+   - **Timer Title**: Enter a descriptive name (e.g., "Project Deadline", "Meeting Start")
+   - **Duration**: Set days (0-365), hours (0-23), minutes (0-59), and seconds (0-59)
+3. **Start the timer** by clicking the "🚀 Start Timer" button
+4. **Share the timer** using the generated URL displayed on screen
+
+### Sharing Timers
+
+Once created, timers can be shared via:
+- **Copy URL button**: Click "📋 Copy URL" to copy the link to clipboard
+- **Manual sharing**: Copy the URL from the browser address bar
+- **Direct access**: Recipients can open the URL in any browser to view the live countdown
+
+**Timer URL structure:**
+```
+https://your-domain.com/index.html?t=BASE64_ENCODED_TIMER_DATA
+```
+
+The URL parameter `t` contains Base64-encoded JSON with:
+- Timer title
+- Start timestamp (Unix epoch)
+- Duration in seconds
+- Creation timestamp
+
+### Monitoring Active Timers
+
+```mermaid
+graph TD
+    A[Timer Running] --> B{Time Remaining?}
+    B -->|Yes| C[Display Countdown<br/>HH:MM:SS]
+    C --> D[Update Every Second]
     D --> B
-    H --> I[Share URL with Others]
-    I --> J[Monitor Timer Progress]
-    J --> K{Timer Expired?}
-    K -->|No| J
-    K -->|Yes| L[Display Completion Message]
+    B -->|No| E[Show 00:00:00]
+    E --> F[Display Completion Modal]
+    F --> G[Timer Expired - Red Text]
 ```
 
-### Step-by-Step Usage
+**Timer display features:**
+- **Live countdown**: Updates every second showing hours:minutes:seconds remaining
+- **Visual feedback**: Timer turns red and pulses when expired
+- **Completion notification**: Modal popup alerts when timer reaches zero
+- **Fullscreen option**: Click "⛶ Fullscreen" for full-screen countdown display
 
-#### 1. Creating a Timer
-1. **Access the Application**: Navigate to your installed application URL
-2. **Enter Timer Details**:
-   - **Title**: Provide a descriptive name (optional, defaults to "Timer")
-   - **Duration**: Set days, hours, minutes, and seconds
-3. **Start Timer**: Click "🚀 Start Timer" to create and begin countdown
-4. **Get Shareable URL**: Copy the generated URL from the timer page
+### Managing Recent Timers
 
-#### 2. Sharing Timers
-- **Copy URL**: Use the "📋 Copy URL" button for instant clipboard copying
-- **Share Link**: Send the URL to anyone who needs to view the timer
-- **Access Anywhere**: Recipients can view the timer from any device/browser
+The application maintains a local history of your 15 most recent timers:
 
-#### 3. Managing Timers
-- **View History**: Recent timers appear in "Your Recent Timers" section
-- **Quick Access**: Click on any previous timer to view its current status
-- **Status Monitoring**: See real-time status (Running/Completed) for all your timers
+1. **View history**: Recent timers appear on the home screen (when not viewing an active timer)
+2. **Reopen timers**: Click "Open" to return to any previous timer
+3. **Check status**: Each timer shows:
+   - Creation date and time (in your local timezone)
+   - Original duration
+   - Current status (Running with time remaining, or Completed)
+4. **Delete timers**: Click "Delete" to remove timers from your local history
 
-### Advanced Features
+**Note:** Recent timer history is stored in browser localStorage and is device-specific. Clearing browser data will remove this history.
 
-#### Fullscreen Mode
-- Click "⛶ Fullscreen" for distraction-free countdown display
-- Press `F11` or `Escape` to exit fullscreen mode
-- Ideal for presentations or focused timing sessions
+### Keyboard Shortcuts
 
-#### Keyboard Shortcuts
-- `Ctrl + C`: Copy current timer URL
-- `F11`: Toggle fullscreen mode
-- `Escape`: Close modal dialogs or exit fullscreen
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+C` | Copy current timer URL to clipboard |
+| `F11` | Toggle fullscreen mode for timer display |
+| `Esc` | Close modal notifications |
 
-#### Timer Duration Examples
-```
-Short Breaks:    0d 0h 5m 0s   (5-minute break)
-Pomodoro:        0d 0h 25m 0s  (25-minute focus session)
-Meeting Timer:   0d 1h 0m 0s   (1-hour meeting)
-Event Countdown: 7d 0h 0m 0s   (week-long countdown)
-```
-
-### Application Architecture
+### Architecture Overview
 
 ```mermaid
 graph TB
-    subgraph "Client Browser"
-        A[HTML/CSS Interface]
-        B[JavaScript Timer Logic]
-        C[Timezone Conversion]
-        D[Local Storage]
+    subgraph Browser
+        A[User Interface<br/>HTML/CSS] --> B[JavaScript Controller]
+        B --> C[Timer Logic]
+        B --> D[URL Encoder/Decoder]
+        B --> E[LocalStorage Manager]
+        
+        C --> F[Countdown Display]
+        D --> G[Shareable URLs]
+        E --> H[Recent Timers History]
     end
     
-    subgraph "PHP Backend"
-        E[Request Handler]
-        F[Timer Creation Logic]
-        G[Database Operations]
-        H[Security Validation]
-    end
+    G -.Share.-> I[Other Users]
+    I -.Open URL.-> A
     
-    subgraph "Data Storage"
-        I[SQLite Database]
-        J[Timer Records]
-        K[Indexed Queries]
-    end
-    
-    A --> E
-    B --> E
-    E --> F
-    F --> G
-    G --> I
-    I --> J
-    J --> K
-    
-    E --> A
-    G --> B
-    H --> F
+    style Browser fill:#111,stroke:#0f0,stroke-width:2px,color:#0f0
+    style A fill:#003300,stroke:#0f0,color:#0f0
+    style B fill:#003300,stroke:#0f0,color:#0f0
+    style C fill:#003300,stroke:#0f0,color:#0f0
+    style D fill:#003300,stroke:#0f0,color:#0f0
+    style E fill:#003300,stroke:#0f0,color:#0f0
 ```
 
-### Database Schema
+## Browser Compatibility
 
-The application uses a simple but effective SQLite schema:
-
-```sql
-CREATE TABLE timers (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    start_timestamp INTEGER NOT NULL,       -- Unix timestamp (UTC)
-    duration_seconds INTEGER NOT NULL,      -- Timer duration in seconds
-    creator_ip VARCHAR(45) NOT NULL,        -- IPv4/IPv6 address
-    created_at INTEGER NOT NULL,            -- Creation timestamp (UTC)
-    title VARCHAR(255) DEFAULT 'Timer'      -- User-defined title
-);
-
--- Performance indexes
-CREATE INDEX idx_creator_ip ON timers(creator_ip);
-CREATE INDEX idx_start_timestamp ON timers(start_timestamp);
-CREATE INDEX idx_created_at ON timers(created_at);
-```
-
-### Troubleshooting
-
-#### Common Issues and Solutions
-
-**Database Permission Errors**
-```bash
-# Fix file permissions
-sudo chown www-data:www-data timers.db
-sudo chmod 664 timers.db
-```
-
-**PHP Extension Missing**
-```bash
-# Ubuntu/Debian
-sudo apt-get install php-sqlite3 php-pdo-sqlite
-
-# CentOS/RHEL
-sudo yum install php-pdo php-sqlite3
-
-# Restart web server after installation
-sudo systemctl restart apache2  # or nginx
-```
-
-**Timer Not Updating**
-- Check browser JavaScript is enabled
-- Verify system clock synchronization
-- Clear browser cache and reload
-
-**URL Sharing Issues**
-- Ensure web server is accessible from target networks
-- Check firewall settings for port 80/443
-- Verify DNS resolution for domain name
-
-## Performance Optimization
-
-### Database Maintenance
-```bash
-# Optimize database (run periodically)
-sqlite3 timers.db "VACUUM;"
-sqlite3 timers.db "ANALYZE;"
-```
-
-### Cleanup Old Timers
-```sql
--- Remove completed timers older than 30 days
-DELETE FROM timers 
-WHERE (start_timestamp + duration_seconds) < (strftime('%s', 'now') - 2592000);
-```
+Tested and verified on:
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Opera 76+
+- Mobile browsers (iOS Safari, Chrome Mobile, Firefox Mobile)
 
 ## Contributing
 
-We welcome contributions to improve xsukax Shared Timers! Please feel free to:
+Contributions are welcome! To contribute:
 
-1. **Report Bugs**: Use GitHub Issues for bug reports
-2. **Suggest Features**: Propose new functionality via Issues
-3. **Submit Pull Requests**: Follow standard GitHub workflow
-4. **Improve Documentation**: Help enhance user guides and code comments
-
-### Development Setup
-```bash
-git clone https://github.com/xsukax/xsukax-Shared-Timers.git
-cd xsukax-Shared-Timers
-php -S localhost:8080  # Start development server
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Make your changes to `index.html`
+4. Test thoroughly across multiple browsers
+5. Commit your changes (`git commit -m 'Add your feature'`)
+6. Push to the branch (`git push origin feature/your-feature`)
+7. Open a Pull Request with a detailed description
 
 ## License
 
-This project is licensed under the **GNU General Public License v3.0** (GPL-3.0).
+This project is licensed under the GNU General Public License v3.0.
 
-You are free to:
-- ✅ Use this software for any purpose
-- ✅ Study and modify the source code
-- ✅ Distribute copies of the software
-- ✅ Distribute modified versions
+## Support
 
-Under the conditions that:
-- 📋 You include the original copyright notice
-- 📋 You include the full license text
-- 📋 You make your modifications open source under GPL-3.0
-- 📋 You document any changes made to the original code
-
-For the complete license terms, see the [LICENSE](LICENSE) file in this repository or visit [https://www.gnu.org/licenses/gpl-3.0.html](https://www.gnu.org/licenses/gpl-3.0.html).
+For issues, questions, or feature requests:
+- **GitHub Issues**: [https://github.com/xsukax/xsukax-Shared-Timers/issues](https://github.com/xsukax/xsukax-Shared-Timers/issues)
+- **Repository**: [https://github.com/xsukax/xsukax-Shared-Timers](https://github.com/xsukax/xsukax-Shared-Timers)
 
 ---
 
-**Made with ❤️ for the open-source community** | **Privacy-first • Security-focused • User-friendly**
+**Built with privacy and simplicity in mind** • No tracking • No ads • No data collection
